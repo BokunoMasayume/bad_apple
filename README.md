@@ -12,3 +12,5 @@ or
 >the output resolution will be width/xscale X height/yscale
 
 
+## References:<https://github.com/leandromoreira/ffmpeg-libav-tutorial>
+
