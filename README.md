@@ -8,6 +8,7 @@ play :
 
 or 
 >./test_bad_apple path/of/video [xscale yscale]
-the output resolution will be width/xscale X height/yscale
+
+>the output resolution will be width/xscale X height/yscale
 
 
