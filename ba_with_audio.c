@@ -319,10 +319,10 @@ printf("hello1\n");
 		    printf("fail to alloc swr_ctx mem\n");
 		    return -1;
 	    }
-	    av_opt_set_int(swr_ctx,"in_channel_layout",AV_CH_FRONT_LEFT , 0);
+	    av_opt_set_int(swr_ctx,"in_channel_layout",AV_CH_LAYOUT_NATIVE , 0);
 	    av_opt_set_int(swr_ctx , "in_sample_rate" , pFrame->sample_rate , 0);
 	    av_opt_set_sample_fmt(swr_ctx,"in_sample_fmt" , pCodecContext->sample_fmt , 0);
-	    av_opt_set_int(swr_ctx , "out_channel_layout", AV_CH_FRONT_LEFT ,0);
+	    av_opt_set_int(swr_ctx , "out_channel_layout", AV_CH_LAYOUT_MONO ,0);
 	    av_opt_set_int(swr_ctx , "out_sample_rate" , pFrame->sample_rate , 0);
 	    av_opt_set_sample_fmt(swr_ctx , "out_sample_fmt" , AV_SAMPLE_FMT_S16,0);
 
@@ -360,12 +360,12 @@ printf("sample rate %d\n",size);
 if(pFrame->data[1]!=NULL){printf("we got second channel\n");}
 else{printf("no second\n");}
 printf("channels is %d\n",pFrame->channels);
-	write(fp , outbuf[0] , pFrame->linesize[0]/2);
+	write(fp , outbuf[0] , pFrame->nb_samples*2);
 printf("pframe pts: %ld\n",pFrame->pts);
 //	av_freep(&outbuf[0]);
 //	av_freep(&outbuf);
-	int delay = pFrame->pts = pervPts;
-	usleep(delay*1000);
+	int delay = pFrame->pts - pervPts;
+	usleep(delay*100);
 	pervPts = pFrame->pts;
       av_frame_unref(pFrame);
     }
