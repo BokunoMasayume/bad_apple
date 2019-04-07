@@ -5,7 +5,7 @@ build_bad_apple : bad_apple.c
 
 .PONY : test_bad_apple
 test_bad_apple: bad_apple
-	./bad_apple /mnt/hgfs/opesys/BadApple.flv
+	./bad_apple BadApple.flv
 
 .PONY : build_audio
 build_audio : ba_with_audio.c
@@ -14,7 +14,7 @@ build_audio : ba_with_audio.c
 
 .PONY : start
 start : ba_with_audio
-	./ba_with_audio /mnt/hgfs/opesys/BadApple.flv
+	./ba_with_audio BadApple.flv
 
 
 

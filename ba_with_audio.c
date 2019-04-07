@@ -365,7 +365,7 @@ printf("pframe pts: %ld\n",pFrame->pts);
 //	av_freep(&outbuf[0]);
 //	av_freep(&outbuf);
 	int delay = pFrame->pts - pervPts;
-	usleep(delay*100);
+	usleep(delay*1000);
 	pervPts = pFrame->pts;
       av_frame_unref(pFrame);
     }
