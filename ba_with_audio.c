@@ -335,6 +335,18 @@ printf("hello2\n");
 printf("hello3\n");
   if(outbuf ==NULL){	
 printf("hello\n");
+
+	int size = 16;
+printf("sample depth %d\n",size);
+	ioctl(fp , SOUND_PCM_WRITE_BITS,&size);
+	size = 0;
+	ioctl(fp , SNDCTL_DSP_STEREO ,&size );
+	size = pFrame->sample_rate;
+printf("sample rate %d\n",size);
+	ioctl(fp , SNDCTL_DSP_SPEED , &size);
+if(pFrame->data[1]!=NULL){printf("we got second channel\n");}
+else{printf("no second\n");}
+printf("channels is %d\n",pFrame->channels);
        	 ret = av_samples_alloc_array_and_samples(&outbuf,&linesize,1,pFrame->nb_samples , AV_SAMPLE_FMT_S16,0);
   
 	 if(ret<0){
@@ -348,24 +360,13 @@ printf("hello\n");
 		return -1;
 	}
 //	int size =8* av_get_bytes_per_sample(pCodecContext->sample_fmt);
-	int size = 16;
 printf("hello\n");
-printf("sample depth %d\n",size);
-	ioctl(fp , SOUND_PCM_WRITE_BITS,&size);
-	size = 1;
-	ioctl(fp , SNDCTL_DSP_STEREO ,&size );
-	size = pFrame->sample_rate;
-printf("sample rate %d\n",size);
-	ioctl(fp , SNDCTL_DSP_SPEED , &size);
-if(pFrame->data[1]!=NULL){printf("we got second channel\n");}
-else{printf("no second\n");}
-printf("channels is %d\n",pFrame->channels);
 	write(fp , outbuf[0] , pFrame->nb_samples*2);
 printf("pframe pts: %ld\n",pFrame->pts);
 //	av_freep(&outbuf[0]);
 //	av_freep(&outbuf);
 	int delay = pFrame->pts - pervPts;
-	usleep(delay*1000);
+	//usleep(delay*1000);
 	pervPts = pFrame->pts;
       av_frame_unref(pFrame);
     }
