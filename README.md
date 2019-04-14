@@ -23,5 +23,7 @@ play:
 - if your system in ALSA architecture,type **modprobe snd-pcm-oss** first
 
 
+*ps: the program can also play other videos,but for better output best input black_and_white videos*
+
 **References**:<https://github.com/leandromoreira/ffmpeg-libav-tutorial>
 

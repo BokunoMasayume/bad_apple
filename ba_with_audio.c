@@ -63,7 +63,9 @@ int main(int argc, const char *argv[])
   if(argc >3){
 	  xscale = char2int(argv[2]);
 	  yscale = char2int(argv[3]);
+	  printf("x:%d y:%d\n",xscale,yscale);
   }
+  //printf("arg conuts :%d  %s %s",argc,argv[0],argv[1]);
   AVFormatContext *pFormatContext = avformat_alloc_context();
   if (!pFormatContext) {
     logging("ERROR could not allocate memory for Format Context");
